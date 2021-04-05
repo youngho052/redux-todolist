@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { actionTodo } from "../store/todoReducer/action";
+import styled from "styled-components";
 
-function NewNoteInput(props) {
+function NewNoteInput() {
   const [note, setNote] = useState("");
 
   const inputValueHandle = (e) => {
@@ -13,23 +14,42 @@ function NewNoteInput(props) {
   const dispatch = useDispatch();
 
   const onSubmit = () => {
-    dispatch(actionTodo(note));
+    if (note) {
+      dispatch(actionTodo(note));
+    }
     setNote("");
   };
 
-  console.log(note);
   return (
-    <div>
-      <input
+    <TodoListContainer>
+      <Input
         onChange={inputValueHandle}
         type="text"
         value={note}
         name="note"
         placeholder="Note"
       />
-      <button onClick={onSubmit}>Add note</button>
-    </div>
+      <Button onClick={onSubmit}>Add note</Button>
+    </TodoListContainer>
   );
 }
 
 export default NewNoteInput;
+
+const TodoListContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+`;
+
+const Input = styled.input`
+  width: 300px;
+  height: 25px;
+  outline: none;
+`;
+
+const Button = styled.button`
+  width: 100px;
+  height: 30px;
+  margin-left: 20px;
+`;

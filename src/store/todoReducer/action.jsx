@@ -12,9 +12,9 @@ export const actionTodo = (value) => {
   };
 };
 
-export const deleteTodo = (id) => {
+export const deleteTodo = (value) => {
   return {
     type: DELETE_TODO_LIST,
-    payload: {},
+    payload: value,
   };
 };
